@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RestorApp - Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #111827 !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            color: #22c55e;
+            font-size: 1.8rem;
+        }
+
+        .logout-btn {
+            background-color: #f0fdf4;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #dcfce7;
+        }
+
+        /* Main Container */
+        .main-container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Recent Orders Section */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .view-all-link {
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .view-all-link:hover {
+            color: #22c55e;
+        }
+
+        /* Order Card */
+        .order-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+
+        .order-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .order-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .order-icon.delivered {
+            background-color: #dcfce7;
+            color: #16a34a;
+        }
+
+        .order-icon.preparing {
+            background-color: #fef3c7;
+            color: #ca8a04;
+        }
+
+        .order-icon.cancelled {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+
+        .order-info {
+            flex-grow: 1;
+        }
+
+        .order-number {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .order-meta {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .order-price {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #111827;
+            margin-right: 1rem;
+        }
+
+        .order-status {
+            padding: 0.35rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+
+        .status-delivered {
+            background-color: #dcfce7;
+            color: #16a34a;
+        }
+
+        .status-preparing {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-cancelled {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-view-receipt {
+            padding: 0.5rem 1.25rem;
+            border: 1px solid #e5e7eb;
+            background: white;
+            color: #6b7280;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .btn-view-receipt:hover {
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+
+        .btn-reorder {
+            padding: 0.5rem 1.25rem;
+            border: none;
+            background: #22c55e;
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .btn-reorder:hover {
+            background: #16a34a;
+        }
+
+        /* Account Details Section */
+        .account-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            position: relative;
+            background: linear-gradient(135deg, #c8f7dc 0%, #a7f3d0 100%);
+            padding: 5px;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .verified-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: #22c55e;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+        }
+
+        .verified-badge i {
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .profile-name {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-email {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .profile-role {
+            display: inline-block;
+            padding: 0.35rem 0.85rem;
+            background-color: #f3f4f6;
+            color: #6b7280;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #f9fafb;
+            padding: 1.25rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            font-size: 1.75rem;
+            color: #111827;
+        }
+
+        .stat-value.loyalty {
+            color: #22c55e;
+        }
+
+        /* Menu Items */
+        .menu-item {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .menu-item:hover {
+            background-color: #f9fafb;
+            border-color: #e5e7eb;
+        }
+
+        .menu-item-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-item-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #f3f4f6;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        .menu-item-text {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .menu-item-arrow {
+            color: #9ca3af;
+        }
+
+        /* Footer */
+        .footer-text {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.85rem;
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #f0fdf4;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .order-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .order-actions {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .btn-view-receipt,
+            .btn-reorder {
+                width: 100%;
+            }
+
+            .account-card {
+                position: relative;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-x-diamond-fill logo-icon"></i>
+                RestorApp
+            </a>
+            <button class="logout-btn">
+                <i class="bi bi-box-arrow-right"></i>
+                Log Out
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="row">
+            <!-- Recent Orders Section -->
+            <div class="col-lg-8">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Orders</h2>
+                    <a href="#" class="view-all-link">View All</a>
+                </div>
+
+                <!-- Order 1 - Delivered -->
+                <div class="order-card">
+                    <div class="order-icon delivered">
+                        <i class="bi bi-truck"></i>
+                    </div>
+                    <div class="order-info">
+                        <div class="order-number">#ORD-4402</div>
+                        <div class="order-meta">Oct 24, 2023 • 2 Items</div>
+                    </div>
+                    <div class="order-price">$45.50</div>
+                    <span class="order-status status-delivered">Delivered</span>
+                    <div class="order-actions">
+                        <button class="btn-view-receipt">View Receipt</button>
+                        <button class="btn-reorder">Reorder</button>
+                    </div>
+                </div>
+
+                <!-- Order 2 - Preparing -->
+                <div class="order-card">
+                    <div class="order-icon preparing">
+                        <i class="bi bi-hourglass-split"></i>
+                    </div>
+                    <div class="order-info">
+                        <div class="order-number">#ORD-4401</div>
+                        <div class="order-meta">Oct 22, 2023 • 1 Item</div>
+                    </div>
+                    <div class="order-price">$12.00</div>
+                    <span class="order-status status-preparing">Preparing</span>
+                </div>
+
+                <!-- Order 3 - Cancelled -->
+                <div class="order-card">
+                    <div class="order-icon cancelled">
+                        <i class="bi bi-x-circle"></i>
+                    </div>
+                    <div class="order-info">
+                        <div class="order-number">#ORD-4399</div>
+                        <div class="order-meta">Oct 10, 2023 • 4 Items</div>
+                    </div>
+                    <div class="order-price">$85.20</div>
+                    <span class="order-status status-cancelled">Cancelled</span>
+                </div>
+
+                <!-- Order 4 - Delivered -->
+                <div class="order-card">
+                    <div class="order-icon delivered">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                    <div class="order-info">
+                        <div class="order-number">#ORD-4382</div>
+                        <div class="order-meta">Sep 15, 2023 • 1 Item</div>
+                    </div>
+                    <div class="order-price">$14.50</div>
+                    <span class="order-status status-delivered">Delivered</span>
+                </div>
+            </div>
+
+            <!-- Account Details Section -->
+            <div class="col-lg-4">
+                <div class="account-card">
+                    <h2 class="section-title mb-4">Account Details</h2>
+                    
+                    <!-- Profile Section -->
+                    <div class="profile-section">
+                        <div class="profile-avatar">
+                            <img src="https://i.pravatar.cc/150?img=5" alt="Alex Student">
+                            <div class="verified-badge">
+                                <i class="bi bi-check-lg"></i>
+                            </div>
+                        </div>
+                        <div class="profile-name">Alex Student</div>
+                        <div class="profile-email">alex.dev@university.edu</div>
+                        <span class="profile-role">Customer</span>
+                    </div>
+
+                    <!-- Stats Section -->
+                    <div class="stats-section">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Orders</div>
+                            <div class="stat-value">12</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Loyalty Pts</div>
+                            <div class="stat-value loyalty">450</div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Items -->
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <div class="menu-item-content">
+                                <div class="menu-item-icon">
+                                    <i class="bi bi-credit-card"></i>
+                                </div>
+                                <span class="menu-item-text">Payment Methods</span>
+                            </div>
+                            <i class="bi bi-chevron-right menu-item-arrow"></i>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-item-content">
+                                <div class="menu-item-icon">
+                                    <i class="bi bi-geo-alt"></i>
+                                </div>
+                                <span class="menu-item-text">Saved Addresses</span>
+                            </div>
+                            <i class="bi bi-chevron-right menu-item-arrow"></i>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-item-content">
+                                <div class="menu-item-icon">
+                                    <i class="bi bi-gear"></i>
+                                </div>
+                                <span class="menu-item-text">Preferences</span>
+                            </div>
+                            <i class="bi bi-chevron-right menu-item-arrow"></i>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="footer-text">
+                        RestorApp Academic Simulation V1.0<br>
+                        Performance monitoring active.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
