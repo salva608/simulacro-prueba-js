@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RestorApp - Menu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #111827 !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            color: #22c55e;
+            font-size: 1.8rem;
+        }
+
+        .nav-link {
+            color: #111827 !important;
+            font-weight: 500;
+            margin-left: 2rem;
+        }
+
+        .nav-link:hover {
+            color: #22c55e !important;
+        }
+
+        /* Main Content */
+        .main-container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            border: none;
+            background-color: white;
+            color: #111827;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .filter-btn:hover {
+            background-color: #f9fafb;
+        }
+
+        .filter-btn.active {
+            background-color: #111827;
+            color: white;
+        }
+
+        /* Product Cards */
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            position: relative;
+        }
+
+        .product-category {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: white;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .product-body {
+            padding: 1.25rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            margin: 0;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #22c55e;
+        }
+
+        .product-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .add-to-order-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #f3f4f6;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .add-to-order-btn:hover {
+            background-color: #e5e7eb;
+        }
+
+        /* Order Summary Sidebar */
+        .order-sidebar {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .order-badge {
+            background-color: #22c55e;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .clear-all-btn {
+            color: #6b7280;
+            font-size: 0.9rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .clear-all-btn:hover {
+            color: #22c55e;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .order-item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .order-item-details {
+            flex-grow: 1;
+        }
+
+        .order-item-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .order-item-note {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .order-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .quantity-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #e5e7eb;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #111827;
+        }
+
+        .quantity-btn:hover {
+            background-color: #f9fafb;
+        }
+
+        .quantity-display {
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .remove-btn {
+            color: #ef4444;
+            font-size: 0.85rem;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: auto;
+        }
+
+        .remove-btn:hover {
+            color: #dc2626;
+        }
+
+        .order-item-price {
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .order-summary {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            color: #6b7280;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .total-amount {
+            color: #22c55e;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: #22c55e;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .confirm-btn:hover {
+            background-color: #16a34a;
+        }
+
+        @media (max-width: 768px) {
+            .order-sidebar {
+                position: relative;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-x-diamond-fill logo-icon"></i>
+                RestorApp
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1 class="page-title">Our Menu</h1>
+
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <i class="bi bi-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search food...">
+                </div>
+
+                <!-- Filter Buttons -->
+                <div class="filter-buttons">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">
+                        <i class="bi bi-shop"></i>
+                        Burgers
+                    </button>
+                    <button class="filter-btn">
+                        <i class="bi bi-cup-straw"></i>
+                        Sides
+                    </button>
+                    <button class="filter-btn">
+                        <i class="bi bi-cup"></i>
+                        Drinks
+                    </button>
+                </div>
+
+                <!-- Product Grid -->
+                <div class="row g-4">
+                    <!-- Classic Beef Burger -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="product-card">
+                            <div style="position: relative;">
+                                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500" alt="Classic Beef Burger" class="product-image">
+                                <span class="product-category">BURGERS</span>
+                            </div>
+                            <div class="product-body">
+                                <div class="product-header">
+                                    <h3 class="product-title">Classic Beef Burger</h3>
+                                    <span class="product-price">$8.99</span>
+                                </div>
+                                <p class="product-description">Premium beef patty with cheddar cheese, lettuce,...</p>
+                                <button class="add-to-order-btn">
+                                    <i class="bi bi-cart-plus"></i>
+                                    Add to order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Double Bacon Melt -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="product-card">
+                            <div style="position: relative;">
+                                <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=500" alt="Double Bacon Melt" class="product-image">
+                                <span class="product-category">BURGERS</span>
+                            </div>
+                            <div class="product-body">
+                                <div class="product-header">
+                                    <h3 class="product-title">Double Bacon Melt</h3>
+                                    <span class="product-price">$12.50</span>
+                                </div>
+                                <p class="product-description">Two patties, crispy bacon, melted swiss cheese, and...</p>
+                                <button class="add-to-order-btn">
+                                    <i class="bi bi-cart-plus"></i>
+                                    Add to order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Golden Fries -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="product-card">
+                            <div style="position: relative;">
+                                <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500" alt="Golden Fries" class="product-image">
+                                <span class="product-category">SIDES</span>
+                            </div>
+                            <div class="product-body">
+                                <div class="product-header">
+                                    <h3 class="product-title">Golden Fries</h3>
+                                    <span class="product-price">$3.99</span>
+                                </div>
+                                <p class="product-description">Freshly cut potatoes fried to perfection with sea salt.</p>
+                                <button class="add-to-order-btn">
+                                    <i class="bi bi-cart-plus"></i>
+                                    Add to order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cola Zero -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="product-card">
+                            <div style="position: relative;">
+                                <img src="https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=500" alt="Cola Zero" class="product-image">
+                                <span class="product-category">DRINKS</span>
+                            </div>
+                            <div class="product-body">
+                                <div class="product-header">
+                                    <h3 class="product-title">Cola Zero</h3>
+                                    <span class="product-price">$2.50</span>
+                                </div>
+                                <p class="product-description">Chilled zero sugar cola with ice and a slice of lemon.</p>
+                                <button class="add-to-order-btn">
+                                    <i class="bi bi-cart-plus"></i>
+                                    Add to order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Donut Box -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="product-card">
+                            <div style="position: relative;">
+                                <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=500" alt="Donut Box" class="product-image">
+                                <span class="product-category">DESSERTS</span>
+                            </div>
+                            <div class="product-body">
+                                <div class="product-header">
+                                    <h3 class="product-title">Donut Box</h3>
+                                    <span class="product-price">$6.00</span>
+                                </div>
+                                <p class="product-description">Assorted glazed and frosted donuts.</p>
+                                <button class="add-to-order-btn">
+                                    <i class="bi bi-cart-plus"></i>
+                                    Add to order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pepperoni Slice -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="product-card">
+                            <div style="position: relative;">
+                                <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500" alt="Pepperoni Slice" class="product-image">
+                                <span class="product-category">PIZZA</span>
+                            </div>
+                            <div class="product-body">
+                                <div class="product-header">
+                                    <h3 class="product-title">Pepperoni Slice</h3>
+                                    <span class="product-price">$4.50</span>
+                                </div>
+                                <p class="product-description">Large NY style slice with double pepperoni.</p>
+                                <button class="add-to-order-btn">
+                                    <i class="bi bi-cart-plus"></i>
+                                    Add to order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Sidebar -->
+            <div class="col-lg-4">
+                <div class="order-sidebar">
+                    <div class="order-header">
+                        <div class="order-title">
+                            Your Order
+                            <span class="order-badge">2</span>
+                        </div>
+                        <a href="#" class="clear-all-btn">Clear all</a>
+                    </div>
+
+                    <!-- Order Items -->
+                    <div class="order-items">
+                        <!-- Item 1 -->
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=100" alt="Classic Beef Burger" class="order-item-image">
+                            <div class="order-item-details">
+                                <div class="order-item-name">Classic Beef Burger</div>
+                                <div class="order-item-note">No onions</div>
+                                <div class="order-item-controls">
+                                    <button class="quantity-btn">−</button>
+                                    <span class="quantity-display">1</span>
+                                    <button class="quantity-btn">+</button>
+                                    <a href="#" class="remove-btn">Remove</a>
+                                </div>
+                            </div>
+                            <div class="order-item-price">$8.99</div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=100" alt="Golden Fries" class="order-item-image">
+                            <div class="order-item-details">
+                                <div class="order-item-name">Golden Fries</div>
+                                <div class="order-item-note">Extra salt</div>
+                                <div class="order-item-controls">
+                                    <button class="quantity-btn">−</button>
+                                    <span class="quantity-display">1</span>
+                                    <button class="quantity-btn">+</button>
+                                    <a href="#" class="remove-btn">Remove</a>
+                                </div>
+                            </div>
+                            <div class="order-item-price">$3.99</div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="order-summary">
+                        <div class="summary-row">
+                            <span>Subtotal.</span>
+                            <span>$12.98</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (8%)</span>
+                            <span>$1.04</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span class="total-amount">$14.02</span>
+                        </div>
+                        <button class="confirm-btn">
+                            Confirm Order
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
