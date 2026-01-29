@@ -1,0 +1,93 @@
+  body {
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+        }
+        
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            background-color: #c8f7dc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .logo-circle i {
+            color: #22c55e;
+            font-size: 24px;
+        }
+        
+        .btn-sign-in {
+            background-color: #22c55e;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        
+        .btn-sign-in:hover {
+            background-color: #16a34a;
+            color: white;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 12px 12px 12px 40px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .input-group {
+            position: relative;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            z-index: 10;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+        
+        .sign-up-link {
+            color: #111827;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .sign-up-link:hover {
+            color: #22c55e;
+        }
+        
+        .footer-text {
+            color: #9ca3af;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 20px;
+        }
