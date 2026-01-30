@@ -34,5 +34,5 @@ export async function navigate(path){
 
 
 
-
+navigate(location.hash || "#login")
 
